@@ -9,38 +9,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --cor-primaria: #004b8d;
-            --cor-secundaria: #337ab7;
-            --cor-fundo: #f4f7f9;
-            --cor-card: #ffffff;
-            --cor-texto: #333333;
-            --cor-borda: #e0e0e0;
-            --cor-sucesso: #28a745;
-            --cor-alerta: #ffc107;
-            --cor-erro: #dc3545;
-            --cor-sombra: rgba(0, 0, 0, 0.1);
-            --cor-sombra-escura: rgba(0, 0, 0, 0.2);
-            --transicao: all 0.3s ease;
-        }
-
-        /* Tema Escuro */
-        body.dark-theme {
-            --cor-fundo: #1c1c1c;
-            --cor-card: #2c2c2c;
-            --cor-texto: #f0f0f0;
-            --cor-borda: #444444;
-            --cor-sucesso: #21b846;
+            --cor-primaria: #a27b4f; /* Dourado da logo */
+            --cor-secundaria: #c9a77c; /* Dourado mais claro */
+            --cor-fundo: #1c1c1c; /* Preto da logo */
+            --cor-card: #2c2c2c; /* Cinza escuro */
+            --cor-texto: #f0f0f0; /* Branco para o texto */
+            --cor-borda: #444444; /* Borda cinza */
+            --cor-sucesso: #a27b4f;
             --cor-alerta: #ffeb3b;
             --cor-erro: #e8586c;
             --cor-sombra: rgba(255, 255, 255, 0.05);
             --cor-sombra-escura: rgba(255, 255, 255, 0.1);
+            --transicao: all 0.3s ease;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
+        /* Tema Padrão (Agora escuro) */
         body {
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
@@ -52,6 +35,7 @@
             min-height: 100vh;
             line-height: 1.6;
             transition: var(--transicao);
+            font-family: 'Inter', sans-serif;
         }
 
         .container {
@@ -64,7 +48,7 @@
 
         .header {
             background: var(--cor-primaria);
-            color: white;
+            color: black;
             padding: 20px;
             text-align: center;
             border-radius: 12px;
@@ -133,6 +117,7 @@
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             transition: border-color 0.2s ease;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
@@ -140,7 +125,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--cor-secundaria);
-            box-shadow: 0 0 0 2px rgba(51, 122, 183, 0.2);
+            box-shadow: 0 0 0 2px rgba(201, 167, 124, 0.2);
         }
 
         .form-group.horizontal {
@@ -158,6 +143,18 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
+        }
+        
+        /* Ajuste específico para a grid de 3 colunas */
+        .form-grid.grid-3-col {
+            grid-template-columns: repeat(3, 1fr); /* Força 3 colunas de largura igual */
+        }
+
+        /* Adicionado para alinhar os inputs na aba "Avançado" */
+        @media (min-width: 769px) {
+            .form-grid.grid-3-col .form-group label {
+                min-height: 55px;
+            }
         }
 
         .tabs {
@@ -207,12 +204,12 @@
 
         .btn-primary {
             background-color: var(--cor-primaria);
-            color: white;
+            color: black;
             box-shadow: 0 4px 6px var(--cor-sombra);
         }
 
         .btn-primary:hover {
-            background-color: #003e7a;
+            background-color: #7a5f44;
             box-shadow: 0 6px 10px var(--cor-sombra-escura);
         }
 
@@ -228,37 +225,11 @@
         
         .btn-export {
             background-color: var(--cor-sucesso);
-            color: white;
+            color: black;
         }
 
         .btn-export:hover {
-            background-color: #218838;
-        }
-
-        .btn-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--cor-card);
-            border: 1px solid var(--cor-borda);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px var(--cor-sombra);
-            transition: var(--transicao);
-        }
-        
-        .btn-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-toggle .icon {
-            font-size: 20px;
-            color: var(--cor-texto);
+            background-color: #7a5f44;
         }
 
         #result-section {
@@ -267,7 +238,7 @@
 
         .summary-card {
             background-color: var(--cor-primaria);
-            color: white;
+            color: black;
             padding: 25px;
             border-radius: 12px;
             text-align: center;
@@ -373,10 +344,6 @@
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: var(--cor-borda) transparent transparent transparent;
-        }
-        
-        body.dark-theme .tooltip .tooltiptext::after {
             border-color: var(--cor-borda) transparent transparent transparent;
         }
         
@@ -543,7 +510,7 @@
         /* Novo estilo para o alinhamento da pergunta */
         .form-group.spaced-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Alinhado à esquerda */
             align-items: center;
             flex-direction: row;
         }
@@ -553,12 +520,37 @@
             align-items: center;
             gap: 5px;
         }
+
+        .form-group.spaced-row input[type="checkbox"] {
+            margin-left: 10px; /* Adiciona espaço entre o texto e o checkbox */
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--cor-primaria);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Largura fixa para campos de data */
+        #salarioBase, #faltasDescontos, #fgtsSaldo {
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        #dataAdmissao, #dataDesligamento {
+            max-width: 250px; 
+            box-sizing: border-box; 
+        }
+        #observacoes {
+            max-width: 400px;
+        }
     </style>
 </head>
 <body>
-    <button id="theme-toggle" class="btn-toggle">
-        <span class="icon">🌙</span>
-    </button>
     <div class="container">
         <div class="header">
             <h1>Calculadora de Rescisão — Dr. Marcílio</h1>
@@ -600,7 +592,7 @@
                                 <label for="dataDesligamento">Data de Desligamento</label>
                                 <input type="date" id="dataDesligamento" value="2024-08-28" required>
                             </div>
-                            <div class="form-group" id="aviso-group">
+                            <div class="form-group">
                                 <label for="avisoModelo">Aviso Prévio</label>
                                 <select id="avisoModelo" required>
                                     <option value="trabalhado">Trabalhado</option>
@@ -632,7 +624,7 @@
 
                         <div class="form-group spaced-row">
                             <div class="label-and-tooltip">
-                                <label for="feriasVencidas" style="white-space: nowrap;">Possui Férias vencidas?</label>
+                                <label for="feriasVencidas">Possui Férias vencidas?</label>
                                 <div class="tooltip">
                                     <span class="tooltip-icon">ⓘ</span>
                                     <span class="tooltiptext">Marque esta opção se o trabalhador possui um período aquisitivo de férias de 12 meses completo, mas ainda não gozou do descanso.</span>
@@ -640,6 +632,7 @@
                             </div>
                             <input type="checkbox" id="feriasVencidas">
                         </div>
+
                         <div class="form-group">
                             <label for="observacoes">Observacoes</label>
                             <textarea id="observacoes" rows="3" placeholder="Insira aqui informações adicionais para o relatório..."></textarea>
@@ -649,7 +642,7 @@
                     <div id="tab-avancado" class="tab-content">
                         <h2>Opções Avançadas</h2>
                         <h3>Médias e Adicionais</h3>
-                        <div class="form-grid">
+                        <div class="form-grid grid-3-col">
                             <div class="form-group">
                                 <label for="mediaHorasExtras">Média de Horas Extras mensais (R$)</label>
                                 <input type="text" id="mediaHorasExtras" class="currency" value="0,00">
@@ -752,9 +745,13 @@
             
             <div class="card about-section">
                 <h2>Sobre o Dr. Marcílio</h2>
-                <p>O Dr. Marcílio é um advogado trabalhista com vasta experiência em direitos do trabalhador e causas rescisórias. Esta ferramenta foi desenvolvida com o objetivo de fornecer uma estimativa educativa e simplificada, com base na legislação da Consolidação das Leis do Trabalho (CLT).</p>
-                <p>Para um cálculo oficial e uma orientação jurídica completa, que leve em conta sua convenção coletiva e especificidades do caso, entre em contato:</p>
-                <p>Email: marciliiochagas@outlook.com<br>Telefone/WhatsApp: +55 (38) 99231-7937</p>
+                <img src="imagens/10.jpg" class="profile-photo" alt="Foto de perfil do Dr. Marcílio">
+                <p>O Dr. Marcílio Pardinho das Chagas é advogado trabalhista com atuação firme e estratégica na defesa dos direitos de trabalhadores e trabalhadoras em todo o Brasil. Reconhecido por sua postura combativa e técnica, coloca à disposição esta ferramenta com o objetivo de oferecer a você, trabalhador, uma estimativa educativa e simplificada dos seus cálculos rescisórios, com base na legislação da Consolidação das Leis do Trabalho (CLT).</p>
+                <p>Este cálculo é uma simulação preliminar, que serve como ponto de partida para compreender os valores que podem ser devidos em uma rescisão contratual. No entanto, cada caso possui particularidades jurídicas que exigem análise profissional e personalizada.</p>
+                <p>Se você acredita que seus direitos foram violados ou deseja uma orientação jurídica completa, com respaldo técnico e estratégico, não hesite:
+                    <br>Entre em contato com o Dr. Marcílio e lute pelos seus direitos com quem entende do assunto.
+                    <br>
+                    <br>Seus direitos não podem esperar. Agende sua consulta agora.</p>
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
                     <a href="https://api.whatsapp.com/send?phone=5538992317937" target="_blank" style="padding: 10px 15px; background-color: #25D366; color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">
                         Fale no WhatsApp
@@ -796,7 +793,6 @@
         const valorDescontos = $('#valor-descontos');
         const calculationTableBody = $('#calculation-table tbody');
         const legalNotesList = $('.legal-notes');
-        const themeToggle = $('#theme-toggle');
         const compareBtn = $('#compare-btn');
         const limparBtn = $('#limpar-btn');
         const comparisonTableBody = $('#comparison-table tbody');
@@ -808,14 +804,14 @@
         const reportDateSpan = $('#report-date');
 
         // Constantes e tabelas (base 2024, editáveis)
-        const inssTabela = [
+        let inssTabela = [
             { limite: 1412.00, aliquota: 0.075, deducao: 0.00 },
             { limite: 2666.68, aliquota: 0.09, deducao: 21.18 },
             { limite: 4000.03, aliquota: 0.12, deducao: 101.18 },
             { limite: 7786.02, aliquota: 0.14, deducao: 181.18 }
         ];
 
-        const irrfTabela = [
+        let irrfTabela = [
             { limite: 2259.20, aliquota: 0.0, deducao: 0.00 },
             { limite: 2826.65, aliquota: 0.075, deducao: 169.44 },
             { limite: 3751.05, aliquota: 0.15, deducao: 381.44 },
@@ -978,22 +974,21 @@
 
         function calcDecimoTerceiro(salarioBase, mediaVerbas, dataAdmissao, dataDesligamento) {
             const salarioComMedias = salarioBase + mediaVerbas;
-            let mesesProporcionais = 0;
-            let mesAdmissao = new Date(dataAdmissao).getMonth();
-            let mesDesligamento = new Date(dataDesligamento).getMonth();
-            let anoAdmissao = new Date(dataAdmissao).getFullYear();
-            let anoDesligamento = new Date(dataDesligamento).getFullYear();
-
-            if (anoAdmissao === anoDesligamento) {
-                mesesProporcionais = (mesDesligamento - mesAdmissao) + 1;
-            } else {
-                mesesProporcionais = (12 - mesAdmissao) + (mesDesligamento + 1);
-            }
+            const dataAdmissaoObj = new Date(dataAdmissao);
+            const dataDesligamentoObj = new Date(dataDesligamento);
             
-            // Verifica se trabalhou 15 dias no mês de desligamento
-            const diaDesligamento = new Date(dataDesligamento).getDate();
-            if (diaDesligamento < 15) {
+            let mesesProporcionais = dataDesligamentoObj.getMonth() + 1;
+            if (dataDesligamentoObj.getDate() < 15) {
                 mesesProporcionais--;
+            }
+
+            if (dataAdmissaoObj.getFullYear() === dataDesligamentoObj.getFullYear()) {
+                mesesProporcionais = (dataDesligamentoObj.getMonth() - dataAdmissaoObj.getMonth()) + 1;
+                if (dataDesligamentoObj.getDate() < 15 && dataAdmissaoObj.getMonth() === dataDesligamentoObj.getMonth()) {
+                     mesesProporcionais = 0;
+                } else if(dataDesligamentoObj.getDate() < 15){
+                     mesesProporcionais--;
+                }
             }
 
             return (salarioComMedias / 12) * mesesProporcionais;
@@ -1026,43 +1021,34 @@
             return fgtsSaldo * aliquota;
         }
 
-        function calcINSS(salarioBase, verbas) {
-            const baseINSS = Math.min(salarioBase + verbas, inssTeto);
+        function calcINSS(baseCalculo) {
             let inssValor = 0;
-            let baseCalculo = baseINSS;
-            
-            // Calculo progressivo (usando faixas)
-            for (let i = inssTabela.length - 1; i >= 0; i--) {
-                const faixa = inssTabela[i];
-                if (baseCalculo > faixa.limite) {
-                    const valorFaixa = baseCalculo - faixa.limite;
-                    inssValor += valorFaixa * faixa.aliquota;
-                    baseCalculo = faixa.limite;
+            const base = Math.min(baseCalculo, inssTeto);
+
+            for (const faixa of inssTabela) {
+                if (base <= faixa.limite) {
+                    inssValor = (base * faixa.aliquota) - faixa.deducao;
+                    return Math.max(0, inssValor);
                 }
             }
-            
-            // Alternativa simplificada usando parcela a deduzir
-            for (let i = inssTabela.length - 1; i >= 0; i--) {
-                const faixa = inssTabela[i];
-                if (baseINSS > faixa.limite) {
-                    return (baseINSS * faixa.aliquota) - faixa.deducao;
-                }
-            }
-            return 0;
+            // Para valores acima da última faixa (teto)
+            const ultimaFaixa = inssTabela[inssTabela.length - 1];
+            inssValor = (base * ultimaFaixa.aliquota) - ultimaFaixa.deducao;
+            return Math.max(0, inssValor);
         }
 
-        function calcIRRF(salarioBase, verbas, inssValor) {
-            const baseIRRF = salarioBase + verbas - inssValor;
+        function calcIRRF(baseCalculo) {
             let irrfValor = 0;
-
-            // Calculo progressivo (usando parcela a deduzir)
-            for (let i = irrfTabela.length - 1; i >= 0; i--) {
-                const faixa = irrfTabela[i];
-                if (baseIRRF > faixa.limite) {
-                    return (baseIRRF * faixa.aliquota) - faixa.deducao;
+            for (const faixa of irrfTabela) {
+                if (baseCalculo <= faixa.limite) {
+                    irrfValor = (baseCalculo * faixa.aliquota) - faixa.deducao;
+                    return Math.max(0, irrfValor);
                 }
             }
-            return 0;
+            // Para valores acima da última faixa
+            const ultimaFaixa = irrfTabela[irrfTabela.length - 1];
+            irrfValor = (baseCalculo * ultimaFaixa.aliquota) - ultimaFaixa.deducao;
+            return Math.max(0, irrfValor);
         }
         
         // Função principal que agrega todos os cálculos
@@ -1074,107 +1060,92 @@
                 mediaHorasExtras, mediaAdicionais, mediaComissoes, pensaoAbre, pensaoValor
             } = data;
             
-            // Converter strings de data para objetos Date
-            const admissao = new Date(dataAdmissao);
-            const desligamento = new Date(dataDesligamento);
+            const admissao = new Date(`${dataAdmissao}T00:00:00`);
+            const desligamento = new Date(`${dataDesligamento}T00:00:00`);
 
             const regras = regrasRescisao[tipoDesligamento];
-            
             const mediaVerbas = mediaHorasExtras + mediaAdicionais + mediaComissoes;
             
             let bruto = 0;
             let descontos = 0;
             const verbas = {};
-            const notas = [];
             const elegibilidade = {
                 fgtsSaque: regras.fgtsSaque,
                 seguroDesemprego: regras.seguroDesemprego,
                 avisoPrazo: 'Em até 10 dias corridos contados do término do contrato.'
             };
             
-            let decimoTerceiro = 0;
-
             // 1. Saldo de Salário
-            const saldoSalario = calcSalarioSaldo(salarioBase, desligamento);
-            verbas['Saldo de Salário'] = { valor: saldoSalario, formula: 'Salário ÷ 30 dias × dias trabalhados no mês' };
+            const saldoSalario = calcSalarioSaldo(salarioBase + mediaVerbas, desligamento);
+            verbas['Saldo de Salário'] = { valor: saldoSalario, formula: `(${formatCurrency(salarioBase + mediaVerbas)} ÷ ${new Date(desligamento.getFullYear(), desligamento.getMonth() + 1, 0).getDate()} dias) × ${desligamento.getDate()} dias` };
             bruto += saldoSalario;
 
-            // 2. Aviso Prévio (calculado para todos os cenários)
+            // 2. Aviso Prévio
             const avisoPrevioValor = calcAvisoPrevio(salarioBase, mediaVerbas, admissao, desligamento);
             if (regras.avisoPrevio) {
-                if (avisoModelo === 'indenizado' && !regras.aviso50p) {
-                    verbas['Aviso Prévio Indenizado'] = { valor: avisoPrevioValor, formula: 'Salário Base + Médias' };
-                    bruto += avisoPrevioValor;
-                    notas.push('O aviso prévio indenizado é uma verba de natureza indenizatória, não incidindo sobre ele INSS e IRRF.');
-                } else if (avisoModelo === 'trabalhado') {
-                    verbas['Aviso Prévio Trabalhado'] = { valor: 0, formula: 'Aviso prévio trabalhado já está incluso no saldo de salário final.' };
-                } else if (avisoModelo === 'nao-cumprido' && regras.avisoDesconta) {
-                    verbas['Aviso Prévio Não Cumprido'] = { valor: -avisoPrevioValor, formula: 'Valor do aviso prévio é descontado por não ter sido cumprido.' };
+                if (avisoModelo === 'indenizado') {
+                    const valorFinalAviso = regras.aviso50p ? avisoPrevioValor / 2 : avisoPrevioValor;
+                    const nomeVerba = `Aviso Prévio ${regras.aviso50p ? '(50%)' : 'Indenizado'}`;
+                    verbas[nomeVerba] = { valor: valorFinalAviso, formula: `Base de ${formatCurrency(salarioBase + mediaVerbas)}` };
+                    bruto += valorFinalAviso;
+                } else if (avisoModelo === 'nao-cumprido' && tipoDesligamento === 'pedido-demissao') {
+                    verbas['Desconto Aviso Prévio'] = { valor: -avisoPrevioValor, formula: `Desconto por não cumprimento` };
                     descontos += avisoPrevioValor;
                 }
             }
-            // Regra do Acordo (Art. 484-A)
-            if (regras.aviso50p) {
-                 verbas['Aviso Prévio Indenizado (50%)'] = { valor: avisoPrevioValor / 2, formula: '50% do valor do aviso prévio indenizado' };
-                 bruto += avisoPrevioValor / 2;
-            }
 
             // 3. 13º Salário
+            let decimoTerceiro = 0;
             if (regras.decimoTerceiro) {
                 decimoTerceiro = calcDecimoTerceiro(salarioBase, mediaVerbas, admissao, desligamento);
-                verbas['13º Salário Proporcional'] = { valor: decimoTerceiro, formula: '(Salário Base + Médias) x (Meses/12)' };
+                verbas['13º Salário Proporcional'] = { valor: decimoTerceiro, formula: `Proporcional aos meses trabalhados no ano` };
                 bruto += decimoTerceiro;
-            } else {
-                verbas['13º Salário Proporcional'] = { valor: 0, formula: 'Não é devido em caso de Justa Causa.' };
             }
 
             // 4. Férias
-            if (feriasVencidas && regras.feriasVencidas) {
+            if (feriasVencidas) {
                 const feriasVencidasValor = calcFeriasVencidas(salarioBase, mediaVerbas);
-                verbas['Férias Vencidas + 1/3'] = { valor: feriasVencidasValor, formula: 'Salário Base + Médias + 1/3 constitucional' };
+                verbas['Férias Vencidas + 1/3'] = { valor: feriasVencidasValor, formula: 'Valor integral + 1/3 constitucional' };
                 bruto += feriasVencidasValor;
-            } else if (!regras.feriasVencidas) {
-                verbas['Férias Vencidas + 1/3'] = { valor: 0, formula: 'Não é devido em caso de Justa Causa.' };
             }
 
             if (regras.feriasProporcionais) {
                 const feriasProporcionais = calcFeriasProporcionais(salarioBase, mediaVerbas, admissao, desligamento);
-                verbas['Férias Proporcionais + 1/3'] = { valor: feriasProporcionais, formula: '(Salário Base + Médias) x (Meses/12) + 1/3' };
+                verbas['Férias Proporcionais + 1/3'] = { valor: feriasProporcionais, formula: 'Proporcional aos meses do período aquisitivo' };
                 bruto += feriasProporcionais;
-            } else {
-                verbas['Férias Proporcionais + 1/3'] = { valor: 0, formula: 'Não é devido em caso de Justa Causa.' };
             }
 
             // 5. FGTS e Multa
             const fgtsSaldoCalculado = calcFgtsSaldo(fgtsOption, fgtsSaldo, fgtsMeses, salarioBase, mediaVerbas);
-            verbas['FGTS Depositado'] = { valor: fgtsSaldoCalculado, formula: 'Estimativa baseada em meses trabalhados ou saldo informado.' };
-
             if (regras.multaFgts > 0) {
                 const multaFgts = calcMultaFgts(fgtsSaldoCalculado, regras.multaFgts);
-                verbas['Multa FGTS'] = { valor: multaFgts, formula: `${(regras.multaFgts * 100)}% do saldo total do FGTS.` };
+                const percentual = (regras.multaFgts * 100).toFixed(0);
+                verbas[`Multa FGTS (${percentual}%)`] = { valor: multaFgts, formula: `${percentual}% sobre o saldo de ${formatCurrency(fgtsSaldoCalculado)}` };
                 bruto += multaFgts;
-            } else {
-                verbas['Multa FGTS'] = { valor: 0, formula: 'Não é devido neste tipo de desligamento.' };
             }
 
             // 6. Descontos
-            const baseINSS = saldoSalario + (regras.decimoTerceiro ? decimoTerceiro : 0);
-            const inssValor = calcINSS(baseINSS, 0); // Ajustar base, somente verbas salariais
-            verbas['INSS'] = { valor: -inssValor, formula: 'Desconto sobre o saldo de salário e 13º salário.' };
-            descontos += inssValor;
+            const baseINSS = saldoSalario + decimoTerceiro;
+            const inssValor = calcINSS(baseINSS);
+            if (inssValor > 0) {
+                verbas['INSS'] = { valor: -inssValor, formula: 'Desconto sobre saldo de salário e 13º' };
+                descontos += inssValor;
+            }
             
-            const baseIRRF = bruto - inssValor;
-            const irrfValor = calcIRRF(baseIRRF, 0, 0); // O IRRF incide sobre o bruto - INSS
-            verbas['IRRF'] = { valor: -irrfValor, formula: 'Desconto sobre a base de cálculo (Bruto - INSS).' };
-            descontos += irrfValor;
+            const baseIRRF = bruto - inssValor; // Simplificado, o cálculo real é mais complexo
+            const irrfValor = calcIRRF(baseIRRF);
+            if (irrfValor > 0) {
+                verbas['IRRF'] = { valor: -irrfValor, formula: 'Estimativa de desconto sobre o total bruto' };
+                descontos += irrfValor;
+            }
 
             if (faltasDescontos > 0) {
-                verbas['Outros Descontos'] = { valor: -faltasDescontos, formula: 'Faltas e outros adiantamentos informados.' };
+                verbas['Outros Descontos'] = { valor: -faltasDescontos, formula: 'Faltas e adiantamentos informados' };
                 descontos += faltasDescontos;
             }
 
             if (pensaoAbre && pensaoValor > 0) {
-                verbas['Pensão Alimentícia'] = { valor: -pensaoValor, formula: 'Valor da pensão alimentícia descontado.' };
+                verbas['Pensão Alimentícia'] = { valor: -pensaoValor, formula: 'Valor da pensão a ser descontado' };
                 descontos += pensaoValor;
             }
 
@@ -1185,71 +1156,64 @@
                 descontos,
                 liquido,
                 verbas,
-                notas,
                 elegibilidade
             };
         }
         
         // Renderização da interface
-        function renderResult(result, isComparison = false) {
-            if (!isComparison) {
-                valorBruto.textContent = formatCurrency(result.bruto);
-                valorDescontos.textContent = formatCurrency(result.descontos);
-                valorLiquido.textContent = formatCurrency(result.liquido);
-                resultSection.style.display = 'block';
+        function renderResult(result) {
+            valorBruto.textContent = formatCurrency(result.bruto);
+            valorDescontos.textContent = formatCurrency(result.descontos);
+            valorLiquido.textContent = formatCurrency(result.liquido);
+            resultSection.style.display = 'block';
 
-                if (result.liquido < 0) {
-                    valorLiquido.textContent = formatCurrency(Math.abs(result.liquido)) + ' (Valor a Pagar)';
-                    valorLiquido.parentElement.classList.add('negative');
-                } else {
-                    valorLiquido.parentElement.classList.remove('negative');
-                }
-                
-                calculationTableBody.innerHTML = '';
-                for (const [key, value] of Object.entries(result.verbas)) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${key}</td>
-                        <td><small>${value.formula}</small></td>
-                        <td class="${value.valor >= 0 ? 'valor-devido' : 'valor-desconto'}">${formatCurrency(value.valor)}</td>
-                    `;
-                    calculationTableBody.appendChild(row);
-                }
-
-                legalNotesList.innerHTML = '';
-                if (result.elegibilidade.fgtsSaque) {
-                    legalNotesList.innerHTML += '<li><strong>Saque FGTS:</strong> Elegível.</li>';
-                } else {
-                    legalNotesList.innerHTML += '<li><strong>Saque FGTS:</strong> Não elegível, exceto em casos de doença grave ou compra da casa própria.</li>';
-                }
-                if (result.elegibilidade.seguroDesemprego) {
-                    legalNotesList.innerHTML += '<li><strong>Seguro-Desemprego:</strong> Elegível, desde que preenchidos os demais requisitos legais.</li>';
-                } else {
-                    legalNotesList.innerHTML += '<li><strong>Seguro-Desemprego:</strong> Não elegível.</li>';
-                }
-                
-                reportDateSpan.textContent = formatDate(new Date());
-
+            if (result.liquido < 0) {
+                valorLiquido.textContent += ' (Valor a Pagar)';
+                valorLiquido.parentElement.classList.add('negative');
             } else {
-                const tipo = result.tipoDesligamento;
+                valorLiquido.parentElement.classList.remove('negative');
+            }
+            
+            calculationTableBody.innerHTML = '';
+            for (const [key, value] of Object.entries(result.verbas)) {
+                if (value.valor === 0 && !key.toLowerCase().includes('desconto')) continue;
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${regrasRescisao[tipo].verbas.join(', ')}</td>
-                    <td>${formatCurrency(result.liquido)}</td>
+                    <td>${key}</td>
+                    <td><small>${value.formula}</small></td>
+                    <td class="${value.valor >= 0 ? 'valor-devido' : 'valor-desconto'}">${formatCurrency(value.valor)}</td>
                 `;
+                calculationTableBody.appendChild(row);
             }
+
+            legalNotesList.innerHTML = '';
+            if (result.elegibilidade.fgtsSaque) {
+                legalNotesList.innerHTML += `<li><strong>Saque FGTS:</strong> Você terá direito a sacar o saldo total depositado.</li>`;
+            } else {
+                legalNotesList.innerHTML += `<li><strong>Saque FGTS:</strong> Não há direito ao saque do saldo do FGTS nesta modalidade.</li>`;
+            }
+            if (result.elegibilidade.seguroDesemprego) {
+                legalNotesList.innerHTML += `<li><strong>Seguro-Desemprego:</strong> Você poderá ter direito ao benefício, se preencher os demais requisitos legais (tempo de trabalho, etc.).</li>`;
+            } else {
+                legalNotesList.innerHTML += `<li><strong>Seguro-Desemprego:</strong> Não há direito ao seguro-desemprego nesta modalidade.</li>`;
+            }
+            
+            reportDateSpan.textContent = formatDate(new Date());
+            resultSection.scrollIntoView({ behavior: 'smooth' });
         }
         
         function updateUIforType(tipo) {
-            const regras = regrasRescisao[tipo];
+            const avisoSelect = $('#avisoModelo');
+            const avisoContainer = avisoSelect.parentElement;
+
             if (tipo === 'pedido-demissao') {
-                avisoGroup.style.display = 'flex';
-                $('#avisoModelo').value = 'nao-cumprido';
-            } else if (tipo === 'sem-justa-causa' || tipo === 'rescisao-indireta') {
-                avisoGroup.style.display = 'flex';
-                $('#avisoModelo').value = 'indenizado';
+                avisoContainer.style.display = 'block';
+                avisoSelect.value = 'nao-cumprido';
+            } else if (tipo === 'sem-justa-causa' || tipo === 'rescisao-indireta' || tipo === 'acordo') {
+                avisoContainer.style.display = 'block';
+                avisoSelect.value = 'indenizado';
             } else {
-                avisoGroup.style.display = 'none';
+                 avisoContainer.style.display = 'none';
             }
         }
         
@@ -1257,109 +1221,132 @@
             if (fgtsOptionSelect.value === 'informar') {
                 fgtsInformadoGroup.style.display = 'flex';
                 fgtsEstimarGroup.style.display = 'none';
-                $('#fgtsSaldo').setAttribute('required', 'required');
-                $('#fgtsMeses').removeAttribute('required');
+                $('#fgtsSaldo').required = true;
+                $('#fgtsMeses').required = false;
             } else {
                 fgtsInformadoGroup.style.display = 'none';
                 fgtsEstimarGroup.style.display = 'flex';
-                $('#fgtsSaldo').removeAttribute('required');
-                $('#fgtsMeses').setAttribute('required', 'required');
+                $('#fgtsSaldo').required = false;
+                $('#fgtsMeses').required = true;
             }
         }
         
         function updatePensãoFields() {
-            if (pensaoAbreCheckbox.checked) {
-                pensaoGroup.style.display = 'flex';
-                $('#pensaoValor').setAttribute('required', 'required');
-            } else {
-                pensaoGroup.style.display = 'none';
-                $('#pensaoValor').removeAttribute('required');
-            }
+            pensaoGroup.style.display = pensaoAbreCheckbox.checked ? 'flex' : 'none';
         }
 
-        function createTableEditor(tableData, editorId) {
+        function createTableEditor(tableData, editorId, tableRef) {
             const editor = $(`#${editorId}`);
             editor.innerHTML = '';
             tableData.forEach((row, index) => {
                 const div = document.createElement('div');
-                div.classList.add('form-group', 'horizontal');
+                div.classList.add('form-grid');
+                div.style.gridTemplateColumns = '1fr 1fr 1fr';
+                div.style.gap = '10px';
                 div.innerHTML = `
-                    <label>Faixa ${index + 1}:</label>
-                    <input type="text" class="currency" value="${formatCurrency(row.limite).replace('R$', '').trim()}" data-field="limite" data-index="${index}">
-                    <label>Alíquota:</label>
-                    <input type="number" step="0.001" value="${row.aliquota}" data-field="aliquota" data-index="${index}">
+                    <div class="form-group">
+                        <label>Limite Faixa ${index + 1}</label>
+                        <input type="text" class="currency" value="${row.limite === Infinity ? 'Acima' : row.limite.toFixed(2).replace('.', ',')}" data-field="limite" data-index="${index}">
+                    </div>
+                    <div class="form-group">
+                        <label>Alíquota (%)</label>
+                        <input type="number" step="0.1" value="${(row.aliquota * 100).toFixed(1)}" data-field="aliquota" data-index="${index}">
+                    </div>
+                    <div class="form-group">
+                        <label>Dedução</label>
+                        <input type="text" class="currency" value="${row.deducao.toFixed(2).replace('.', ',')}" data-field="deducao" data-index="${index}">
+                    </div>
                 `;
                 editor.appendChild(div);
+
+                div.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const field = e.target.dataset.field;
+                        const idx = parseInt(e.target.dataset.index);
+                        let value = e.target.value;
+
+                        if (e.target.classList.contains('currency')) {
+                            value = parseCurrency(value);
+                        } else if (field === 'aliquota') {
+                            value = parseFloat(value) / 100;
+                        } else {
+                            value = parseFloat(value);
+                        }
+                        
+                        if(editorId.includes('inss')) {
+                            inssTabela[idx][field] = value;
+                        } else {
+                            irrfTabela[idx][field] = value;
+                        }
+                    });
+                });
             });
         }
         
         // Lógica de exportação
-        function exportToPDF() {
-            const container = $('.container');
-            const originalWidth = container.style.width;
-            container.style.width = '1000px'; // Temporarily adjust width for better PDF rendering
-            
-            html2canvas(container, {
-                scale: 2,
-                logging: true,
-                useCORS: true
-            }).then(canvas => {
+        async function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const content = $('#result-section');
+            const originalDisplay = content.style.display;
+            content.style.display = 'block'; // Ensure it's visible for capture
+
+            try {
+                const canvas = await html2canvas(content, { scale: 2 });
                 const imgData = canvas.toDataURL('image/png');
-                const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-                const imgWidth = 210; 
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = imgWidth / imgHeight;
+                const newImgHeight = pdfWidth / ratio;
                 
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pdf.internal.pageSize.getHeight();
-                
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pdf.internal.pageSize.getHeight();
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, newImgHeight);
+                pdf.save('estimativa_rescisao.pdf');
+            } catch (error) {
+                console.error("Erro ao gerar PDF:", error);
+                showMessage("Erro na Exportação", "Ocorreu um problema ao tentar gerar o PDF.");
+            } finally {
+                if ($('#valor-liquido').textContent === 'R$ 0,00') {
+                    content.style.display = originalDisplay;
                 }
-                pdf.save('relatorio_rescisao.pdf');
-                container.style.width = originalWidth; // Restore original width
-            }).catch(err => {
-                console.error("Erro ao gerar PDF:", err);
-                showMessage("Erro na Exportação", "Ocorreu um erro ao gerar o PDF. Por favor, tente a impressão direta.");
-            });
+            }
         }
         
         // Lógica de compartilhamento
         function getShareLink() {
-            const formData = new FormData(form);
+            const fieldsToShare = ['tipoDesligamento', 'salarioBase', 'dataAdmissao', 'dataDesligamento', 'avisoModelo', 'faltasDescontos', 'feriasVencidas', 'fgtsOption', 'fgtsSaldo', 'fgtsMeses', 'mediaHorasExtras', 'mediaAdicionais', 'mediaComissoes', 'pensaoAbre', 'pensaoValor'];
             const params = new URLSearchParams();
-            for (const [key, value] of formData.entries()) {
-                params.set(key, value);
-            }
+            fieldsToShare.forEach(id => {
+                const element = $(`#${id}`);
+                if (element) {
+                    const value = element.type === 'checkbox' ? element.checked : element.value;
+                    if (value) {
+                         params.set(id, value);
+                    }
+                }
+            });
             return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
         }
 
         // Eventos
         window.addEventListener('load', () => {
-            // Inicializa as tabelas de INSS/IRRF
             createTableEditor(inssTabela, 'inss-table-editor');
             createTableEditor(irrfTabela, 'irrf-table-editor');
             
-            // Carrega estado da URL se existir
             const params = new URLSearchParams(window.location.search);
             if (params.size > 0) {
-                for (const [key, value] of params.entries()) {
+                params.forEach((value, key) => {
                     const input = $(`#${key}`);
                     if (input) {
-                        if (input.type === 'checkbox') {
-                            input.checked = value === 'on';
-                        } else {
-                            input.value = value;
-                        }
+                        if (input.type === 'checkbox') input.checked = (value === 'true');
+                        else input.value = value;
                     }
-                }
+                });
                 updateUIforType(tipoDesligamentoSelect.value);
                 updateFGTSFields();
                 updatePensãoFields();
+                form.dispatchEvent(new Event('submit'));
             }
         });
 
@@ -1377,19 +1364,19 @@
         pensaoAbreCheckbox.addEventListener('change', updatePensãoFields);
 
         // Mascaramento de inputs
-        $$('.currency').forEach(input => {
-            input.addEventListener('input', (e) => {
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('currency')) {
                 let value = e.target.value.replace(/\D/g, '');
-                value = (value / 100).toFixed(2).replace('.', ',');
-                value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                value = (value / 100).toFixed(2) + '';
+                value = value.replace(".", ",");
+                value = value.replace(/(\d)(?=(\d{3})+(?!\d)+(,))/g, "$1.");
                 e.target.value = value;
-            });
+            }
         });
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Reúne dados do formulário
             const formData = {
                 tipoDesligamento: tipoDesligamentoSelect.value,
                 salarioBase: parseCurrency($('#salarioBase').value),
@@ -1408,10 +1395,8 @@
                 pensaoValor: parseCurrency($('#pensaoValor').value)
             };
             
-            // Executa o cálculo e renderiza
             const resultado = calcRescisao(formData);
             renderResult(resultado);
-            
             scenarioComparisonSection.style.display = 'none';
         });
 
@@ -1441,107 +1426,61 @@
                 return calcRescisao(scenarioData);
             });
 
-            const verbasList = Array.from(new Set(scenarios.flatMap(tipo => regrasRescisao[tipo].verbas)));
-            
-            // Cria as linhas do comparativo
-            const totalBrutoRow = document.createElement('tr');
-            totalBrutoRow.innerHTML = `<td>Total Bruto</td>${results.map(r => `<td>${formatCurrency(r.bruto)}</td>`).join('')}`;
-            comparisonTableBody.appendChild(totalBrutoRow);
-            
-            const totalDescontosRow = document.createElement('tr');
-            totalDescontosRow.innerHTML = `<td>Total Descontos</td>${results.map(r => `<td>${formatCurrency(r.descontos)}</td>`).join('')}`;
-            comparisonTableBody.appendChild(totalDescontosRow);
-            
-            const totalLiquidoRow = document.createElement('tr');
-            totalLiquidoRow.innerHTML = `<td><strong>Líquido a Receber</strong></td>${results.map(r => `<td><strong>${formatCurrency(r.liquido)}</strong></td>`).join('')}`;
-            comparisonTableBody.appendChild(totalLiquidoRow);
-            
+            const rowsData = [
+                { label: 'Total Bruto', key: 'bruto' },
+                { label: 'Total Descontos', key: 'descontos' },
+                { label: '<strong>Líquido a Receber</strong>', key: 'liquido' }
+            ];
+
+            rowsData.forEach(rowData => {
+                 const row = document.createElement('tr');
+                 row.innerHTML = `<td>${rowData.label}</td>` + results.map(r => `<td>${rowData.key === 'liquido' ? '<strong>' : ''}${formatCurrency(r[rowData.key])}${rowData.key === 'liquido' ? '</strong>' : ''}</td>`).join('');
+                 comparisonTableBody.appendChild(row);
+            });
+
             scenarioComparisonSection.style.display = 'block';
             resultSection.style.display = 'none';
+            scenarioComparisonSection.scrollIntoView({ behavior: 'smooth' });
         });
         
         limparBtn.addEventListener('click', () => {
-            const formInputs = form.querySelectorAll('input:not([type="button"]):not([type="submit"]), select, textarea');
-            formInputs.forEach(input => {
-                if (input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
+            form.reset();
+            
+            // Restaurar valores padrão para inputs de currency
+            $$('.currency').forEach(input => {
+                if (input.id !== 'salarioBase' && input.id !== 'fgtsSaldo') {
+                     input.value = '0,00';
                 }
             });
-            
-            // Restaurar valores padrão
-            $('#salarioBase').value = '1518,00';
-            $('#dataAdmissao').value = '2024-01-15';
-            $('#dataDesligamento').value = '2024-08-28';
-            $('#fgtsSaldo').value = '5000,00';
-            $('#fgtsMeses').value = '12';
-            $('#mediaHorasExtras').value = '0,00';
-            $('#mediaAdicionais').value = '0,00';
-            $('#mediaComissoes').value = '0,00';
-            $('#pensaoValor').value = '200,00';
-            $('#faltasDescontos').value = '0,00';
 
-            // Resetar visibilidade dos campos
             updateUIforType(tipoDesligamentoSelect.value);
             updateFGTSFields();
             updatePensãoFields();
 
-            // Esconder seções de resultado
             resultSection.style.display = 'none';
             scenarioComparisonSection.style.display = 'none';
         });
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            themeToggle.innerHTML = isDark ? '<span class="icon">☀️</span>' : '<span class="icon">🌙</span>';
-        });
-        
         printBtn.addEventListener('click', () => window.print());
-        pdfBtn.addEventListener('click', () => exportToPDF());
+        pdfBtn.addEventListener('click', exportToPDF);
         
         shareBtn.addEventListener('click', () => {
             const shareLink = getShareLink();
             navigator.clipboard.writeText(shareLink).then(() => {
-                showMessage("Link Copiado!", "O link com os dados da sua simulação foi copiado para a área de transferência.");
+                showMessage("Link Copiado!", "O link com os dados da sua simulação foi copiado. Você pode colá-lo em qualquer lugar para compartilhar.");
             }).catch(err => {
                 console.error('Erro ao copiar link: ', err);
-                showMessage("Erro", "Não foi possível copiar o link. Por favor, copie manualmente da barra de endereços.");
+                showMessage("Erro", "Não foi possível copiar o link automaticamente. Por favor, copie o endereço da página.");
             });
         });
 
         whatsappBtn.addEventListener('click', () => {
-            const resultado = calcRescisao({
-                tipoDesligamento: tipoDesligamentoSelect.value,
-                salarioBase: parseCurrency($('#salarioBase').value),
-                dataAdmissao: $('#dataAdmissao').value,
-                dataDesligamento: $('#dataDesligamento').value,
-                avisoModelo: $('#avisoModelo').value,
-                faltasDescontos: parseCurrency($('#faltasDescontos').value),
-                feriasVencidas: $('#feriasVencidas').checked,
-                fgtsOption: fgtsOptionSelect.value,
-                fgtsSaldo: parseCurrency($('#fgtsSaldo').value),
-                fgtsMeses: parseInt($('#fgtsMeses').value) || 0,
-                mediaHorasExtras: parseCurrency($('#mediaHorasExtras').value),
-                mediaAdicionais: parseCurrency($('#mediaAdicionais').value),
-                mediaComissoes: parseCurrency($('#mediaComissoes').value),
-                pensaoAbre: pensaoAbreCheckbox.checked,
-                pensaoValor: parseCurrency($('#pensaoValor').value)
-            });
-            
-            const shareText = `*Simulação de Rescisão - Dr. Marcílio*\n\n` +
-                             `*Tipo:* ${$('#tipoDesligamento option:checked').text}\n` +
-                             `*Líquido a Receber:* ${formatCurrency(resultado.liquido)}\n` +
-                             `*Bruto:* ${formatCurrency(resultado.bruto)}\n` +
-                             `*Descontos:* ${formatCurrency(resultado.descontos)}\n\n` +
-                             `*Detalhes:* \n${Object.entries(resultado.verbas).map(([key, val]) => `- ${key}: ${formatCurrency(val.valor)}`).join('\n')}\n\n` +
-                             `*Link da simulação:* ${getShareLink()}`;
-
-            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            const text = `Olá, Dr. Marcílio. Fiz uma simulação na sua calculadora de rescisão. Gostaria de uma análise do meu caso.\n\nConfira os dados da minha simulação aqui: ${getShareLink()}`;
+            const url = `https://api.whatsapp.com/send?phone=5538992317937&text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         });
 
     </script>
 </body>
 </html>
+
